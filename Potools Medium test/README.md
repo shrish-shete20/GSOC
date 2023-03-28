@@ -1,2 +1,2 @@
 # TASK
-Install `potools` R package and provide a simple example of using it.
+Show evidence of knowledge of flexdashboard(past work done or a basic flexdashboard that is styled using CSS - a sidebar layout)
