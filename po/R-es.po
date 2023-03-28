@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SCCTempConverter 0.0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-29 00:27+0530\n"
+"PO-Revision-Date: 2023-03-29 00:27+0530\n"
+"Last-Translator: Shrish Shete <sheteshrish1203@gmail.com>\n"
+"Language-Team: es\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: potools 0.2.2\n"
+
+#: temp_conversion.R:3
+msgid "Temperature has been converted from F to C."
+msgstr "La temperatura se ha convertido de F a C."
+
+#: temp_conversion.R:9
+msgid "Temperature has been converted from C to F."
+msgstr "La temperatura se ha convertido de C a F."

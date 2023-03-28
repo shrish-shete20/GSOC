@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SCCTempConverter 0.0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-29 00:55+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: temp_conversion.R:3
+msgid "Temperature has been converted from F to C."
+msgstr ""
+
+#: temp_conversion.R:9
+msgid "Temperature has been converted from C to F."
+msgstr ""
