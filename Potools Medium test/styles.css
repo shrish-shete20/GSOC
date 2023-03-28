@@ -1,0 +1,32 @@
+.navbar {
+    background-color: #35C4C4;
+    color: #1D4CDB;
+    margin-bottom: 0;
+}
+
+.navbar-inverse {
+    color: blue;
+}
+
+.chart-title {
+    color: blue;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 7px 10px 4px;
+    font-family: Serif;
+}
+
+.chart-shim {
+    color: green;
+    font-family: fantasy;
+}
+
+.navbar-brand {
+    color: blue;
+    background-color: #C79387;
+}
+
+.content {
+    padding: 2px;
+}

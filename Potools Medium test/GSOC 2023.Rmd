@@ -1,0 +1,62 @@
+---
+title: "GSOC 2023"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: flatly
+    vertical_layout: fill
+    css: "styles.css"
+    sidebar:
+      - 
+        navlist:
+          "Section 1":
+            - "Subsection 1.1"
+            - "Subsection 1.2"
+          "Section 2":
+            - "Subsection 2.1"
+            - "Subsection 2.2"
+---
+
+
+  
+  
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+
+```
+
+## Section 1
+
+### Subsection 1.1
+
+Any Text
+
+```{r}
+ggplot(data = mpg, aes(x = displ, y = hwy)) + 
+  geom_point()+ggtitle("First Graph")
+```
+
+### Subsection 1.2
+Any text
+```{r}
+ggplot(data = mpg, aes(x = cyl, fill = class)) +
+  geom_bar()+ggtitle("Second Graph")
+
+```
+
+## Section 2
+
+### Subsection 2.1
+text
+```{r}
+ggplot(data = diamonds, aes(x = carat, y = price)) +
+  geom_point()+ggtitle("Third Graph")
+
+```
+
+### Subsection 2.2
+text
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point()+ggtitle("Fourth Graph")
+```
