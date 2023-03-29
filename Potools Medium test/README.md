@@ -13,6 +13,6 @@ Show evidence of knowledge of flexdashboard(past work done or a basic flexdashbo
 The content is divided into different sections, each containing a plot and a table. The dashboard is designed using CSS to style the sidebar, header, and content areas.To customize the flexdashboard, you can modify the CSS in the `styles.css` file. Theme flatly is used as the base styling.
 
 ### Files
-`GSOC 2023.Rmd`: The R Markdown file that contains the dashboard code.
-`GSOC 2023.html`: The HTML file that contains dashboard.
-`styles.css`: The CSS file that contains the styling for the dashboard.
+- `GSOC 2023.Rmd`: The R Markdown file that contains the dashboard code.
+- `GSOC 2023.html`: The HTML file that contains dashboard.
+- `styles.css`: The CSS file that contains the styling for the dashboard.
