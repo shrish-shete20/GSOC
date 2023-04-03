@@ -1,0 +1,67 @@
+country,iso_code,vaccines,people_vaccinated,people_fully_vaccinated,lat,long
+Albania,ALB,Pfizer/BioNTech,4900,439,41.09708418,20.10925138
+Andorra,AND,Pfizer/BioNTech,2903,NA,42.52996445,1.563245209
+Anguilla,AIA,Oxford/AstraZeneca,1341,NA,18.22495906,-63.05356534
+Argentina,ARG,Sputnik V,6477388,2370508,-37.65934036,-65.45939025
+Austria,AUT,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",4810295,962193,47.5797319,13.47336569
+Azerbaijan,AZE,"Oxford/AstraZeneca, Sputnik V",65000,NA,40.1969167,46.85409565
+Bahrain,BHR,"Pfizer/BioNTech, Sinopharm/Beijing",6004334,NA,26.05096186,50.54970668
+Bangladesh,BGD,Oxford/AstraZeneca,1285520,NA,23.50905166,90.50611804
+Belgium,BEL,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",8101456,1343952,50.59062728,4.73210363
+Bermuda,BMU,Pfizer/BioNTech,25398,3191,32.30740881,-64.76533985
+Brazil,BRA,"Oxford/AstraZeneca, Sinovac",56622057,500692,-9.80237464,-55.28056799
+Bulgaria,BGR,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",1049066,324140,42.62485704,24.96409571
+Cambodia,KHM,Sinopharm/Beijing,1492,NA,12.59715426,105.1177878
+Canada,CAN,"Moderna, Pfizer/BioNTech",3473708,376848,65.2931221,-89.7561759
+Cayman Islands,CYM,Pfizer/BioNTech,34734,19512,19.57615429,-80.43169975
+Chile,CHL,"Pfizer/BioNTech, Sinovac",12060717,529372,-44.84064492,-72.31060275
+Costa Rica,CRI,Pfizer/BioNTech,192381,42809,9.756016839,-84.03993753
+Croatia,HRV,Pfizer/BioNTech,685409,191718,44.64204021,16.34878586
+Cyprus,CYP,Pfizer/BioNTech,99425,31632,35.06383926,33.35030769
+Czechia,CZE,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",7174530,1617244,49.8175,15.473
+Denmark,DNK,"Moderna, Pfizer/BioNTech",6856304,2079130,55.70473306,10.73125458
+Ecuador,ECU,Pfizer/BioNTech,9318,NA,-1.643067241,-81.62440596
+Estonia,EST,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",539100,233371,58.53493858,24.59475612
+Faeroe Islands,FRO,Pfizer/BioNTech,16276,2513,61.8926,-6.9118
+Finland,FIN,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",2962032,649042,63.95119465,24.43022351
+France,FRA,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",39721645,3657074,46.16686105,3.226979203
+Germany,DEU,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",61851721,15902900,51.20460855,10.40115606
+Gibraltar,GIB,Pfizer/BioNTech,329628,62879,36.1408,5.3536
+Greece,GRC,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",6366125,1229507,38.35875267,23.94053688
+Greenland,GRL,Pfizer/BioNTech,2584,NA,72.51351386,-41.67123992
+Guernsey,GGY,Pfizer/BioNTech,6151,522,49.47854451,-2.560030801
+Hungary,HUN,Pfizer/BioNTech,5980200,1650910,47.23226487,19.42393128
+Iceland,ISL,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",83380,30189,65.30841881,-19.86729002
+Indonesia,IDN,Sinovac,11244040,2145820,-2.996080521,119.475746
+Iran,IRN,Sputnik V,3000,NA,33.29490975,53.15067347
+Ireland,IRL,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",1083733,497138,53.49476024,-8.439389414
+Isle of Man,IMN,"Oxford/AstraZeneca, Pfizer/BioNTech",129406,34068,54.22252248,-4.545406914
+Israel,ISR,"Moderna, Pfizer/BioNTech",118198329,46328441,31.87650005,35.21034702
+Italy,ITA,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",48066814,17323480,42.16598249,11.75285266
+Jersey,JEY,"Oxford/AstraZeneca, Pfizer/BioNTech",37870,9360,49.20955912,-2.099582248
+Latvia,LVA,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",571369,217941,56.86747881,25.36948449
+Lithuania,LTU,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",2314113,732650,55.08303816,24.08004029
+Luxembourg,LUX,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",206214,39494,49.76263187,6.06234933
+Malta,MLT,Pfizer/BioNTech,629084,131508,35.96162701,14.37084973
+Mauritius,MUS,Oxford/AstraZeneca,207,NA,-20.29733768,57.54531258
+Mexico,MEX,Pfizer/BioNTech,18302860,1192580,24.21141486,-103.5980383
+Norway,NOR,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",3420431,583077,69.87699815,16.24354089
+Oman,OMN,"Oxford/AstraZeneca, Pfizer/BioNTech",659966,119501,21.74126718,56.01689903
+Pakistan,PAK,"Oxford/AstraZeneca, Sinopharm/Beijing, Sputnik V",27228,NA,30.17547725,69.80404594
+Peru,PER,Sinopharm/Beijing,166790,NA,-7.4457227,-73.97537663
+Poland,POL,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",26465332,5607760,51.40997794,19.08651572
+Portugal,PRT,"Moderna, Pfizer/BioNTech",4003011,1325239,39.93083948,-7.887035126
+Romania,ROU,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",14873174,2838109,45.84464847,24.52921207
+Russia,RUS,Sputnik V,4080500,1700000,63.54476059,99.16678365
+Serbia,SRB,"Pfizer/BioNTech, Sinopharm/Beijing, Sputnik V",7503337,298637,44.25244721,20.75116898
+Seychelles,SYC,"Oxford/AstraZeneca, Sinopharm/Beijing",497364,36473,-4.67993176,55.48194647
+Singapore,SGP,Pfizer/BioNTech,762600,12100,1.366417024,103.8665593
+Slovakia,SVK,Pfizer/BioNTech,4198468,471927,48.83819067,19.62059133
+Slovenia,SVN,"Oxford/AstraZeneca, Pfizer/BioNTech",1923825,656656,46.12320394,14.84369235
+Spain,ESP,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",27714357,7977951,40.67995298,-2.906820906
+Sweden,SWE,"Oxford/AstraZeneca, Pfizer/BioNTech",2262894,478696,61.89590923,17.57630542
+Turkey,TUR,Sinovac,6320827,793423,39.06608087,34.29492853
+Turks and Caicos Islands,TCA,Pfizer/BioNTech,6433,NA,21.82682346,-71.98106174
+United Arab Emirates,ARE,"Oxford/AstraZeneca, Pfizer/BioNTech, Sinopharm/Beijing, Sinopharm/Wuhan, Sputnik V",836568,250000,24.25769826,54.38752719
+United Kingdom,GBR,"Oxford/AstraZeneca, Pfizer/BioNTech",266855544,16271745,55.3781,-3.436
+United States,USA,"Moderna, Pfizer/BioNTech",732774855,165632502,37.0902,-95.7129

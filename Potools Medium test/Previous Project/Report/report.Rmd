@@ -1,0 +1,444 @@
+
+---
+title: "ARE INDIRECT EFFECTS CLAIMING MORE LIVES IN COVID-19 THAN WE REALIZE ?"
+author: "Group 19"
+output:
+  html_document:
+    df_print: paged
+
+---
+----
+
+DATA SCIENCE WITH R : MTH208A \
+Paulomi Das \
+Manav Reddy \
+Shrish Shete \
+Biplab Naskar \
+
+
+## Content
+*Abstract...........................\
+*Introduction........................\
+*Overview of Dataset..................\
+*Challenges Faced......................\
+*Interesting Questions..................\
+*Visualisations..........................\
+
+## Abstract:
+Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.
+This project aims to analyse the key causes that are affecting COVID 19 cases without affecting it directly. We intend to present a comprehensive overview of the factors affecting COVID 19 all over the world and some thought-provoking questions on the management of individuals with a diagnosis of COVID-19.Finally, the  R SHINY APP present and summarize the data in a interactive dashboard.
+
+
+## Introduction :
+
+The COVID-19 pandemic has led loss of so many lives worldwide and has presented an unprecedented challenge to all the governments and to various sectors, mainly health line workers working daily to reduce the human loss as much as possible.
+Two years ago, the whole world had come to a stand still and we all know the reason – Covid-19. There were different number of waves in each countries and different variants of covid affecting each country in different ways. 
+For every country there are a few indicators which tell us about it. And every country has a different story altogether.
+We collected the indicators which could possibly have had impact on controlling covid.
+
+The Indicators we have considered are:\
+* Population of the country \
+* Human development index\
+* GDP (by per capita)\
+* Life expectancy by country\
+* Happiness Index\
+* Number of tests done\
+* Territorial impact\
+
+## OVERVIEW OF DATASET :
+
+We have Scrapped the detailed data available for a particular indicator country wise from various websites: \
+1) Covid total cases & Total deaths\
+-<a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>\
+2) Population of the Country\
+-<a href="https://ceoworld.biz/2022/03/28/list-of-countries-and-territories-with-the-largest-population-2022/">https://ceoworld.biz/2022/03/28/list-of-countries-and-territories-with-the-largest-population-2022/"
+ </a>\
+3) Gross Domestic Product (GDP) per capita\
+-<a href="https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita">https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita</a>\
+4) Happiness Index\
+-<a href="https://dmerharyana.org/world-happiness-index/">https://dmerharyana.org/world-happiness-index/</a>\
+5) Life Expectancy\
+-<a href="https://www.worldometers.info/demographics/life-expectancy/">https://www.worldometers.info/demographics/life-expectancy/</a>\
+
+CSV Files:\
+* Testing.csv : Number of COVID 19 tests are performed\
+* Vaccinations.csv : Vaccines and location details\
+
+We have arranged our complete dataset in two dataframes:\
+i) Country Vaccinations  ii)covid report\
+
+Interactive tools, including maps, epidemic curves and other charts and graphics, with downloadable data, allow users to track and explore the latest trends.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(rvest)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+#covid cases
+covid_table <-
+  read_html("https://www.worldometers.info/coronavirus/") %>% html_table()
+covid_country <- covid_table[[1]][["Country,Other"]][9:237]
+total_cases <-
+  covid_table[[1]][["TotalCases"]][9:237] %>% gsub(pattern = ',', replacement = '') %>%
+  as.numeric()
+Total_deaths <-
+  covid_table[[1]][["TotalDeaths"]][9:237] %>% gsub(pattern = ',', replacement = '') %>%
+  as.numeric()
+population <-
+  read_html(
+    "https://ceoworld.biz/2022/03/28/list-of-countries-and-territories-with-the-largest-population-2022/"
+  ) %>% html_table()
+covid_country[1] <- "United States"
+covid_country[6] <- "South Korea"
+covid_country[7] <- "United Kingdom"
+countries <- population[[1]][["Country"]]
+n <- length(countries)
+cov_pop <- numeric(229)
+case_pop <- numeric(229)
+for (i in 1:229)
+{
+  for (j in 1:n)
+  {
+    if (covid_country[i] == countries[j])
+    {
+      cov_pop[i] <-
+        population[[1]][["2022 Population"]][j]         #population is in billion
+    }
+  }
+}
+for (i in 1:229)
+{
+  case_pop[i] <- total_cases[i] / (cov_pop[i] * 1000)
+}
+#Total population
+populations <- cov_pop * 1000
+#economy
+gdp <-
+  read_html("https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita") %>% html_table()
+coun <- as.data.frame(gdp[[1]][[1]][3:219])
+country = character(229)
+for (i in 1:217)
+{
+  country[i] <-
+    substring(coun[i, 1], first = 0, last = nchar(coun[i, 1]) -
+                2)
+}
+gdp <- as.data.frame(gdp[[1]][5])
+gdp_new <-
+  gdp[3:219, 1] %>% gsub(pattern = ",", replacement = "") %>% as.numeric()
+gdp_cov <- numeric(229)
+for (i in 1:229)
+{
+  for (j in 1:217)
+  {
+    if (covid_country[i] == country[j])
+    {
+      gdp_cov[i] <- gdp_new[j]
+      #UN gdp of corresponding countries 2020
+    }
+  }
+}
+#happiness
+happy <-
+  read_html("https://dmerharyana.org/world-happiness-index/") %>% html_table()
+happy <- as.data.frame(happy[[1]])
+happy <- happy[, 2:3]
+performance = numeric(229)
+for (i in 1:229)
+{
+  for (j in 1:146)
+  {
+    if (covid_country[i] == happy[j, 1])
+    {
+      performance[i] <- happy[j, 2]    #happiness index
+    }
+  }
+}
+#expectancy
+life <-
+  read_html("https://www.worldometers.info/demographics/life-expectancy/") %>% html_table()
+life <- as.data.frame(life[[1]])
+life <- life[, 2:3]
+Life_expectancy <- numeric(229)
+for (i in 1:229)
+{
+  for (j in 1:202)
+  {
+    if (covid_country[i] == life[j, 1])
+    {
+      Life_expectancy[i] <- life[j, 2] #life expectancy of each country
+    }
+  }
+}
+#number of tests 
+x <- read.csv("testing.csv")
+countr <- unique(x$Entity)
+tests <- numeric(188)
+for (j in 1 : 188)
+{
+  y <- which (x$Entity == countr[j])
+  tests[j] <- max(x$total_tests[y]) 
+}
+Number_of_tests <- numeric(229)
+for (i in 1 : 229) 
+{
+  for (j in 1 : 188)
+  {
+    if (covid_country[i] == countr[j])
+    {
+      Number_of_tests[i] <- tests[j]
+    }
+  }
+}
+Rank <- c(1:229)
+Country_name <- covid_country
+cases_per_pop <- case_pop
+GDP_per_capita_income_in_US_dollars <- gdp_cov
+Happiness_index <- performance
+Total_number_of_cases <- total_cases
+Population_of_the_country <- populations
+death_rate <- Total_deaths / Total_number_of_cases
+#Economy as per Happiness report
+eco <- read.csv("2022.csv") %>% as.data.frame()
+eco_coun <- eco$Country
+eco_gdp <- eco$Explained.by..GDP.per.capita
+eco_vec <- numeric(229)
+for (i in 1:229)
+{
+  for (j in 1:146)
+  {
+    if (covid_country[i] == eco_coun[j])
+    {
+      eco_vec[i] = eco_gdp[j]
+    }
+  }
+}
+eco_vec <- gsub(eco_vec, pattern = ",", replacement = '') %>% as.numeric()
+#Dataframe
+covid_report <-
+  data.frame(
+    Rank,
+    Country_name,
+    Population_of_the_country,
+    Number_of_tests,
+    Total_number_of_cases,
+    Total_deaths,
+    death_rate ,
+    cases_per_pop,
+    GDP_per_capita_income_in_US_dollars,
+    eco_vec,
+    Happiness_index,
+    Life_expectancy
+  )
+x = which(covid_report$Happiness_index == 0.000)
+y = which(covid_report$GDP_per_capita_income_in_US_dollars == 0)
+z = which(covid_report$eco_vec == 0)
+a = which(covid_report$Life_expectancy == 0)
+b = which(covid_report$Number_of_tests == 0)
+covid_report = covid_report[-c(x, y, z, a,b),]
+covid_report = covid_report[complete.cases(covid_report),]
+kable(head(covid_report))%>%
+  kable_styling(full_width = F)
+```
+
+### Challenges Faced:
+* Websites with Indicators such as GDP,Happiness Index, Life Expectancy etc  considers nearly all 195 countries. Whereas data related to Covid-19 such as Total no. of Deaths, Total No. of Cases,Vaccination Details were available for less countries. As a result we had to Clean the dataset obtained from different Websites through Country Name matching.
+* Different websites name the Countries in different ways. We need to change the Country names to a unique way.
+* As a result, we ended up with a dataframe of COVID report with 107 observations with 11 columns each indiacting the Factors affecting covid 19.
+* Vaccination details with location was not available for scrapping so we used a csv file from github.
+
+
+
+## Interesting Questions
+* Is the country with most population has the most deaths?
+* Which country/countries have been better than all other countries in containing covid?
+* Did GDP have any impact on total number of cases and total number of deaths ? 
+* Which age group was  the most exposed  and effected to covid ?
+* Is Distribution of Vaccination uniform all over the world at the beginning stages of vaccination? 
+
+
+ 
+## Visualisations :
+
+
+
+* Firstly We have visualisations involving GDP(by per capita) and Covid Death Rate trough Dual Axis Barplot , observe if at all did GDP had an impact on Covid-19.
+
+  + Countries with higher Blue Bar ( higher GDP per capita) has relatively lower red dotes( less death rates).
+  + Among Top 10 countries in COVID death rates INDIA has the poor condition of Death Rate with lower GDP as well.USA conditon being the right opposite of INDIA. Does this indicate the effect of GDP per capita on COVID Death Rates?
+  
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(ggtext)
+ggp <- ggplot(covid_report[c(1:10),]) +
+  geom_bar(aes(x=Country_name, y=GDP_per_capita_income_in_US_dollars),stat="identity", fill="cyan",colour="#006000")+
+  geom_point(aes(x=Country_name, y=((Total_deaths/Total_number_of_cases)*1000000)),stat="identity",color="red",size=2)+
+  labs(
+    title = "**Plot of Gdp vs Total deaths Country wise**  
+    <span style='color:#006000;'>  GDP  </span>  ~ 
+    <span style='color:red;'>Death rates</span>
+    </span>",
+    x="country",y="Gdp per capita"  ) +  theme_minimal() +
+  theme(
+    plot.title = element_markdown(lineheight = 1.1))+
+   scale_y_continuous(sec.axis=sec_axis(~.*1000,name="death rates"))
+ggp
+```
+
+
+* In the Bubble plot below the size of each bubble depicts the population of each country.
+
+  + Looking into relation Population size of the country alongwith the two other factors considered before.
+  * There is a cluster of comparatively bigger circles found in the lower part of the plot(Low GDP and Less No. of Covid Tests).
+  * Does that Low GDP and high population size indicating lesser No. of test done?
+ 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(covid_report,aes(x=GDP_per_capita_income_in_US_dollars,
+                        y=(Number_of_tests/Population_of_the_country) ,size=(Population_of_the_country/1e7))) +
+  geom_point(show.legend = TRUE, alpha = 0.7,colour ="orange") +ylim(0,12)+scale_x_log10()+scale_size(range=c(0.1,20),name = "POPULATION") +labs(title = "No. of tests per population vs GDP of the country with size of the bubble depicting the population of the country", y = "No. of tests per population" , x = "GDP per capita income in US dollars")
+```
+
+* In the next plot we have divided the countries in three categories (i.e. high, medium, low) based on population, so that we can know whether the population had an impact on number of cases or deaths due to covid.
+
+  + The plot very significantly present 3 slopes of Death rates for unit increase for unit increase in the Total No. of Cases.
+  + Population size Higher has the slope which increases faster compared to Medium and LOw population.
+  + Does it indicates that spread of Covid virus was faster and more severe in Highly populated Countries?
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+Q = quantile(covid_report$Population_of_the_country)
+Q1= Q[2]
+Q2 = Q[4]
+Q3 = Q[5]
+pop_category<-numeric(nrow(covid_report))
+for(i in 1:nrow(covid_report))
+{
+  if(covid_report$Population_of_the_country [i]<= Q1)
+  {
+    pop_category[i]=1
+  }
+  else if(covid_report$Population_of_the_country[i]>Q1&  covid_report$Population_of_the_country[i]<=Q2)
+  {
+    pop_category[i]=2
+  }
+  
+  else if(covid_report$Population_of_the_country [i]>= Q1)
+  {
+    pop_category[i] = 3
+  }
+}
+covid_report = cbind(covid_report,pop_category)
+plot(covid_report$Total_number_of_cases,covid_report$Total_deaths, pch = 16, xlim = c(0,5000000),ylim = c(0,70000),
+     col = unique(pop_category),
+     xlab = "Total No. of Cases", ylab = "Total No. of Deaths",main = "Is the country with more population has the more risk of deaths?")
+
+for(i in unique(pop_category)) #1:black #2:pink #3:green
+{
+  foo <- subset(covid_report, covid_report$pop_category == i)
+  abline(lm(foo$Total_deaths ~ foo$Total_number_of_cases), col = i)
+}
+legend("topright", col = unique(covid_report$pop_category), 
+       legend = c("High","Medium","Low"),
+       title = "Populations" ,cex=1,pch =16,pt.cex = 1.4)
+```
+
+
+* Below we have a pie chart which shows the age wise distribution of deaths due to covid-19.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+age65 <- 693887100
+age18 <- 351135400
+age0 <- 9733000
+age_sum <- sum(age0, age18, age65)
+age0_per <- as.integer((age0 / age_sum) * 100) + 1
+age18_per <- as.integer((age18 / age_sum) * 100) + 1
+age65_per <- as.integer((age65 / age_sum) * 100) + 1
+age <-
+  data.frame(
+    category = c("0-17", "18-65", "65+"),
+    no_of_people = c(age0_per, age18_per, age65_per)
+  )
+ggplot(age, aes(x = "", y = no_of_people, fill = category)) +
+  geom_col(color = "black") + geom_text(aes(label = no_of_people ),
+                                        position = position_stack(vjust = 0.5)) +
+  coord_polar(theta = "y")+labs(title = "AGE WISE DISTRIBUTION OF DEATHS DUE TO COVID 19")
+```
+
+
+* Here, scatter plot shows Country's economy related  with death rates 
+  * It gives a Negative Correlation altogether.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(covid_report, aes(x = eco_vec, y = death_rate)) + geom_point(show.legend = "True",alpha = 0.5, col = "red") +
+  geom_smooth(method = "lm", se = FALSE)+labs(title = "Relation between Economy  and Death rate")
+```
+
+* The next plot tries to point out how much death rate affects life expectancy.
+ 
+ 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ ggplot(covid_report, aes(x = Life_expectancy, y = death_rate)) + geom_point(col = "green") +
+  geom_vline(xintercept = mean(covid_report$Life_expectancy)) + geom_smooth(method = "lm", se = FALSE)+labs(title = "Relation between Life Expectancy and Death rate")
+```
+
+
+* Lastly this world Map is based on the dataset in the beginning stages of Covid Vaccinations(2021).It Shows the countries which had access to vaccine at early stages of vaccine development.
+```{r echo=FALSE, out.width = "30%", fig.align = "center"}
+z=paste(getwd(),"/Worldmap.jpg",sep="")
+knitr::include_graphics(z)
+```
+
+## Conclusions :
+
+-> The countries with higher GDP are the countries which have relatively lesser death rate when compared to the countries with lesser GDP. 
+The countries with higher GDP are the countries with relatively lesser population and are able to conduct more number of tests per population compared to the countries with higher population (which has relatively lesser GDP).
+
+-> Hence, we can conclude that countries with higher GDP are economically stable and medically advanced, therefore they are able to provide better facilities.
+
+-> From the above plots we can come to a conclusion that population size indeed had an effect on both number of covid cases and deaths due to covid.
+
+-> The most exposed and effected age group due to covid is people of age greater than 65, since their deaths contribute to the highest percentage(i.e. 66%) of total number of deaths.
+
+-> Countries with Life Expectancy higher than the Average Life Expectancy has comparatively lower death rate due to Covid19.
+
+-> Countries with darker Color in the Interactive world map depicts that those countries were either economically more stable or medically advanced that they could start the Vaccination drive so earlier.
+
+
+## Acknowledgement
+We would like to express our profound gratitude to  Dr.Dootika Vats for her contributions to the completion of our project on the Impact of various factors on Covid 19.
+
+
+
+## References :
+
+\-<a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>\
+
+\-<a href="https://ceoworld.biz/2022/03/28/list-of-countries-and-territories-with-the-largest-population-2022/">https://ceoworld.biz/2022/03/28/list-of-countries-and-territories-with-the-largest-population-2022/"
+ </a>\
+ 
+\-<a href="https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita">https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita</a>\
+
+\-<a href="https://dmerharyana.org/world-happiness-index/">https://dmerharyana.org/world-happiness-index/</a>\
+
+\-<a href="https://www.worldometers.info/demographics/life-expectancy/">https://www.worldometers.info/demographics/life-expectancy/</a>\
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+ 
+
+
+
+ 
+ 
+ 
+ 
+ 
